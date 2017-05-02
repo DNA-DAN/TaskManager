@@ -90,6 +90,12 @@ class TaskType(models.Model):
     #status =
 #class CommsContact (models.Model):
 
+TASK_STATUSES = (
+	('n', 'New'),
+	('a', 'Completed'),
+	('c', 'Cancelled'),
+)
+
 class Task(models.Model):
     
     task_name = models.CharField(max_length=50)
@@ -102,7 +108,7 @@ class Task(models.Model):
     completed_date = models.DateField()
     notes = models.TextField(max_length=2000,  blank=True)
     task_type = models.ForeignKey(TaskType)
-    #status = 
+    status = models.CharField(max_length=1, choices = TASK_STATUSES, default='n')
     #cancelled_by =
     cancellation_reason = models.TextField(max_length=200, blank=True)
     #cancelled_datetime =
@@ -111,7 +117,7 @@ class Task(models.Model):
 
     #task_owner = 
     #Equipment =
-    # 
+    #
     
     def __str__(self):
         return self.task_name

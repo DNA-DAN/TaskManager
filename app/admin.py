@@ -3,9 +3,9 @@ from app.models import *
 
 # Register your models here.
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('task_name','description','Due_Date',)
+    list_display = ('task_name','description','Due_Date','status',)
     list_filter = ('Due_Date','task_type',)
-	
+    actions = ['set_complete',]
     fieldsets = (
 	    ('General Task Information', {
 		    'fields': ('task_name', 'task_type', 'description', 'customer', 'Due_Date', 'to_do',)
@@ -16,6 +16,17 @@ class TaskAdmin(admin.ModelAdmin):
         'description': 'Please add the detailed of the completed task'
         })
         )	
+    
+    def set_complete(self, request, queryset):
+        row_updated = queryset.update(status = 'a')
+		
+        if row_updated == 1:
+            message_bit = '1 task was'
+        else:	
+            message_bit = '%s tasks were' % row_updated
+
+        self.message_user(request, '%s marked as completed.' % message_bit,)
+    set_complete.short_description = 'Mark task(s) as completed.'
 
 admin.site.register(Task, TaskAdmin)
 
