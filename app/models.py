@@ -13,14 +13,13 @@ class Country(models.Model):
 
 class Organisation(models.Model):
     org_name = models.CharField(max_length=300)
-    street1 = models.CharField(max_length=100)
-    #make street1 and 2 nullable 
-    street2 = models.CharField(max_length=100)
-    city = models.CharField(max_length=100)
+    street1 = models.CharField(max_length=100, blank=True)
+    street2 = models.CharField(max_length=100, blank=True)
+    city = models.CharField(max_length=100, blank=True)
     country = models.ForeignKey(Country)
-    postcode = models.CharField(max_length=10)
-    phone_number = models.CharField(max_length=50)
-    EMail = models.EmailField(max_length=254)
+    postcode = models.CharField(max_length=10, blank=True)
+    phone_number = models.CharField(max_length=50, blank=True)
+    EMail = models.EmailField(max_length=254, blank=True)
     #Status =
 
     def __str__(self):
@@ -30,8 +29,8 @@ class Organisation(models.Model):
 
 class Department(models.Model):
     department_name = models.CharField(max_length=300)
-    phone_number = models.CharField(max_length=50)
-    EMail = models.EmailField(max_length=254)
+    phone_number = models.CharField(max_length=50,  blank=True)
+    EMail = models.EmailField(max_length=254,  blank=True)
     organisation = models.ForeignKey(Organisation)
 
     def __str__(self):
@@ -39,15 +38,13 @@ class Department(models.Model):
 
 class Site(models.Model):
     site_name = models.CharField(max_length=50)
-    street1 = models.CharField(max_length=100)
-    street2 = models.CharField(max_length=100)
-    city = models.CharField(max_length=100)
+    street1 = models.CharField(max_length=100, blank=True)
+    street2 = models.CharField(max_length=100, blank=True)
+    city = models.CharField(max_length=100,  blank=True)
     country = models.ForeignKey(Country)
-    postcode = models.CharField(max_length=10)
-    phone_number = models.CharField(max_length=50)
-    EMail = models.EmailField(max_length=254)
-    #change department to organisation - so 1 org has many sites and one org has many departments, but departments can
-    department = models.ForeignKey(Department)
+    postcode = models.CharField(max_length=10, blank=True)
+    phone_number = models.CharField(max_length=50, blank=True)
+    organisation = models.ForeignKey(Organisation)
 
     
     def __str__(self):
@@ -95,22 +92,21 @@ class TaskType(models.Model):
 
 class Task(models.Model):
     
-    # change the fields that wont nesseasrly be filled in on first entry to allow null and blank
     task_name = models.CharField(max_length=50)
     description = models.TextField(max_length=1000)
-    Due_Date = models.DateField(("Due Date"))
-    to_do = models.TextField(max_length=2000)
+    Due_Date = models.DateField(("Due Date"), blank=True, null=True)
+    to_do = models.TextField(max_length=2000,  blank=True)
     customer = models.ForeignKey(Customer)
     duration = models.DurationField()
     #completed_by = 
     completed_date = models.DateField()
-    notes = models.TextField(max_length=2000)
+    notes = models.TextField(max_length=2000,  blank=True)
     task_type = models.ForeignKey(TaskType)
     #status = 
     #cancelled_by =
-    cancellation_reason = models.TextField(max_length=200, blank=True, null=True)
+    cancellation_reason = models.TextField(max_length=200, blank=True)
     #cancelled_datetime =
-    created_datetime = models.DateTimeField(auto_now_add=False)
+    created_datetime = models.DateTimeField(auto_now_add=True)
     #auto_create_run_id
 
     #task_owner = 

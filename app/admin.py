@@ -5,12 +5,34 @@ from app.models import *
 class TaskAdmin(admin.ModelAdmin):
     list_display = ('task_name','description','Due_Date',)
     list_filter = ('Due_Date','task_type',)
+	
+    fieldsets = (
+	    ('General Task Information', {
+		    'fields': ('task_name', 'task_type', 'description', 'customer', 'Due_Date', 'to_do',)
+        }),
+		('Task Completed?', {
+        'classes': ('collapse',),
+        'fields': ('completed_date', 'notes', 'duration',),
+        'description': 'Please add the detailed of the completed task'
+        })
+        )	
+
 admin.site.register(Task, TaskAdmin)
 
 class OrganisationAdmin(admin.ModelAdmin):
     list_display = ('org_name','city',)
     search_fields = ['org_name','city']
     list_filter = ('org_name','city',)
+    fieldsets = (
+	    ('General Information', {
+		    'fields': ('org_name','phone_number','EMail',)
+        }),
+		('Address', {
+        'classes': ('collapse',),
+        'fields': ('street1', 'street2', 'city', 'country','postcode',),
+        'description': 'please add an address'
+        })
+        )	
 
 
 admin.site.register(Organisation, OrganisationAdmin)
@@ -23,8 +45,8 @@ class DepartmentAdmin(admin.ModelAdmin):
 admin.site.register(Department, DepartmentAdmin)
 
 class SiteAdmin(admin.ModelAdmin):
-    list_display = ('site_name','department',)
-    list_filter = ('department',)
+    list_display = ('site_name','organisation',)
+    #list_filter = ('organisation',)
 
 admin.site.register(Site, SiteAdmin)
 
