@@ -63,7 +63,7 @@ admin.site.register(Site, SiteAdmin)
 
 class CustomerAdmin(admin.ModelAdmin):
     list_display = ('customer_name','customer_organisation',)
-    search_fields = ['customer_name']
+    search_fields = ['customer_name'] 
     list_filter = ('customer_organisation',)
 admin.site.register(Customer, CustomerAdmin)
 
