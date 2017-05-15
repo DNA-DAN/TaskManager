@@ -19,7 +19,6 @@ class TaskAdmin(admin.ModelAdmin):
     
     def set_complete(self, request, queryset):
         row_updated = queryset.update(status = 'a')
-		
         if row_updated == 1:
             message_bit = '1 task was'
         else:	

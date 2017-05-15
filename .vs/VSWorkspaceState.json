@@ -2,8 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\app",
-    "\\app\\migrations",
+    "\\app\\templates",
+    "\\app\\__pycache__",
     "\\TaskManager"
   ],
+  "SelectedNode": "\\app",
   "PreviewInSolutionExplorer": false
 }
