@@ -3,9 +3,10 @@
     "",
     "\\app",
     "\\app\\templates",
+    "\\app\\templates\\auth",
     "\\app\\__pycache__",
     "\\TaskManager"
   ],
-  "SelectedNode": "\\app",
+  "SelectedNode": "\\app\\auth.py",
   "PreviewInSolutionExplorer": false
 }
